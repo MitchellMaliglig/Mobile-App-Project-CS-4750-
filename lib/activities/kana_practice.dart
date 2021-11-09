@@ -14,14 +14,17 @@ class _KanaPracticeState extends State<KanaPractice> {
   Random random = new Random();
 
   var kpNum = 1;
-  var kpWord = '';
+  var kpWord = 'taberu';
+  var kpWordTemp = 'taberu';
+  var kpKana = 'たべる';
+  bool showAnswer = false;
 
   // kpNum = 1;
-  var kpHiragana = ['taberu', 'sushi', 'jisho'];
+  var kpHiragana = ['taberu', 'sushi', 'jisho', 'niku', 'neko'];
 
   // kpNum = 2;
-  var kpKatakana = ['keiki', 'pan', 'karee'];
-
+  var kpKatakana = ['ke-ki', 'pan', 'kare-', 'sofa', 'beddo'];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +39,13 @@ class _KanaPracticeState extends State<KanaPractice> {
                     icon: Icon(Icons.menu),
                     elevation: 40,
                     onSelected: (value){
-
+                      if (value == 1){
+                        kpNum = 1;
+                      }
+                      else if (value == 2){
+                        kpNum = 2;
+                      }
+                      setState((){});
                     },
                     itemBuilder: (context) => [
                       PopupMenuItem(
@@ -81,14 +90,14 @@ class _KanaPracticeState extends State<KanaPractice> {
                 children: [
                   Container(
                     margin: EdgeInsets.only(top: 50, bottom: 5),
-                    child: Text('すし',
+                    child: Text(kpKana, // word in kana
                       style: TextStyle(
                         fontSize: 60,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  Text('Sushi',
+                  Text((showAnswer) ? kpWord : '---', // word in romaji
                     style: TextStyle(
                       fontSize: 60,
                       fontWeight: FontWeight.bold,
@@ -106,7 +115,10 @@ class _KanaPracticeState extends State<KanaPractice> {
                     margin: EdgeInsets.only(top: 20, bottom: 15),
                       width: 200,
                       child: ElevatedButton(
-                          onPressed: (){},
+                          onPressed: (){
+                            showAnswer = !showAnswer;
+                            setState((){});
+                          },
                           child: Text('Show Answer')
                       ),
                   ),
@@ -114,7 +126,24 @@ class _KanaPracticeState extends State<KanaPractice> {
                     margin: EdgeInsets.only(top: 15, bottom: 20),
                     width: 200,
                     child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          do {
+                            if (kpNum == 1) {
+                              kpWordTemp = kpHiragana[random.nextInt(kpHiragana.length)];
+                            }
+                            else if (kpNum == 2) {
+                              kpWordTemp = kpKatakana[random.nextInt(kpKatakana.length)];
+                            }
+                          } while (kpWordTemp == kpWord);
+                          kpWord = kpWordTemp;
+                          if (kpNum == 1) {
+                            kpKana = kana.toHiragana(kpWord);
+                          }
+                          else if (kpNum == 2) {
+                            kpKana = kana.toKatakana(kpWord);
+                          }
+                          setState((){});
+                        },
                         child: Text('Another Word')
                     ),
                   )
