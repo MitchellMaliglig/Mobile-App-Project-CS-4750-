@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app_project/lessons/jp_text_intro.dart';
 
 class LessonsPage extends StatefulWidget {
   const LessonsPage({Key? key}) : super(key: key);
@@ -20,23 +21,13 @@ class _LessonsPageState extends State<LessonsPage> {
               parent: AlwaysScrollableScrollPhysics()),
           children: [
             OutlinedButton(
-                onPressed: (){},
-                child: Text('Intro to JP Alphabet')),
-            OutlinedButton(
-                onPressed: (){},
-                child: Text('Hiragana 1')),
-            OutlinedButton(
-                onPressed: (){},
-                child: Text('Hiragana 2')),
-            OutlinedButton(
-                onPressed: (){},
-                child: Text('Katakana 1')),
-            OutlinedButton(
-                onPressed: (){},
-                child: Text('Katakana 2')),
-            OutlinedButton(
-                onPressed: (){},
-                child: Text('Level 1 Kanji')),
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => JPTextIntro()),
+                  );
+                },
+                child: Text('Intro to JP Text')),
           ],
         ),
       ),
