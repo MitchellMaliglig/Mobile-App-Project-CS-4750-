@@ -62,7 +62,8 @@ class _KanaPracticeState extends State<KanaPractice> {
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                            ),),
+                            ),
+                          ),
                           value: 2,
                       ),
                     ]
@@ -119,7 +120,7 @@ class _KanaPracticeState extends State<KanaPractice> {
                             showAnswer = !showAnswer;
                             setState((){});
                           },
-                          child: Text('Show Answer')
+                          child: Text((!showAnswer) ? 'Show Answer' : 'Hide Answer')
                       ),
                   ),
                   Container(

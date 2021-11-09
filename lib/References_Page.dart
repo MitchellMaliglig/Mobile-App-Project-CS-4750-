@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReferencesPage extends StatefulWidget {
   const ReferencesPage({Key? key}) : super(key: key);
@@ -25,9 +26,6 @@ class _ReferencesPageState extends State<ReferencesPage> {
             OutlinedButton(
                 onPressed: (){},
                 child: Text('Katakana Chart')),
-            OutlinedButton(
-                onPressed: (){},
-                child: Text('Level 1 Kanji')),
           ],
         ),
       ),
