@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app_project/activities/kana_practice.dart';
 
 class ActivitiesPage extends StatefulWidget {
   const ActivitiesPage({Key? key}) : super(key: key);
@@ -20,23 +21,13 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
               parent: AlwaysScrollableScrollPhysics()),
           children: [
             OutlinedButton(
-                onPressed: (){},
-                child: Text('High Scores')),
-            OutlinedButton(
-                onPressed: (){},
-                child: Text('Hiragana Search')),
-            OutlinedButton(
-                onPressed: (){},
-                child: Text('Katakana Search')),
-            OutlinedButton(
-                onPressed: (){},
-                child: Text('Kanji Search')),
-            OutlinedButton(
-                onPressed: (){},
-                child: Text('Shiritori')),
-            OutlinedButton(
-                onPressed: (){},
-                child: Text('Crossword Puzzle')),
+                onPressed: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => KanaPractice()),
+                  );
+                  },
+                child: Text('Kana Practice')),
           ],
         ),
       ),
