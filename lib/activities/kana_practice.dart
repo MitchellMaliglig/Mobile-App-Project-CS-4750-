@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kana_kit/kana_kit.dart';
+import 'dart:math';
+
 class KanaPractice extends StatefulWidget {
   const KanaPractice({Key? key}) : super(key: key);
 
@@ -7,6 +10,18 @@ class KanaPractice extends StatefulWidget {
 }
 
 class _KanaPracticeState extends State<KanaPractice> {
+  final kana = KanaKit();
+  Random random = new Random();
+
+  var kpNum = 1;
+  var kpWord = '';
+
+  // kpNum = 1;
+  var kpHiragana = ['taberu', 'sushi', 'jisho'];
+
+  // kpNum = 2;
+  var kpKatakana = ['keiki', 'pan', 'karee'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,15 +32,35 @@ class _KanaPracticeState extends State<KanaPractice> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
-                  icon: Icon(Icons.menu),
-                  color: Colors.black,
-                  onPressed: (){},
+                PopupMenuButton(
+                    icon: Icon(Icons.menu),
+                    elevation: 40,
+                    onSelected: (value){
+
+                    },
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                          child: Text('Hiragana',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          value: 1,
+                      ),
+                      PopupMenuItem(
+                          child: Text('Katakana',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                          value: 2,
+                      ),
+                    ]
                 ),
                 Expanded(
                   flex: 5,
                   child: Center(
-                    //    margin: EdgeInsets.only(left: 40),
                       child:
                       Text('Kana Practice',
                       style: TextStyle(
