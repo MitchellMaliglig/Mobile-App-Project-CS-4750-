@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mitch.mobile_app_project">
    <application
-        android:label="mobile_app_project"
+        android:label="Japanese For Beginners"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
