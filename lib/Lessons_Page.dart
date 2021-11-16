@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app_project/lessons/AdvancedKana.dart';
+import 'package:mobile_app_project/lessons/BasicKana.dart';
 import 'package:mobile_app_project/lessons/jp_text_intro.dart';
 
 class LessonsPage extends StatefulWidget {
@@ -27,7 +29,26 @@ class _LessonsPageState extends State<LessonsPage> {
                     MaterialPageRoute(builder: (context) => JPTextIntro()),
                   );
                 },
-                child: Text('Intro to JP Text')),
+                child: Text('Intro to JP Text')
+            ),
+            OutlinedButton(
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BasicKana()),
+                  );
+                },
+                child: Text('Basic Kana')
+            ),
+            OutlinedButton(
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AdvancedKana()),
+                  );
+                },
+                child: Text('Advanced Kana')
+            ),
           ],
         ),
       ),

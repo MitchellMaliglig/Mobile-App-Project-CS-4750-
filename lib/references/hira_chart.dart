@@ -28,7 +28,9 @@ class _HiraganaChartState extends State<HiraganaChart> {
               Expanded(
                   flex: 90,
                   child: InteractiveViewer(
-                      child: Image.asset('assets/hiraganachart.png')))
+                      child: Image.asset('assets/hiraganachart.png')
+                  ),
+              ),
             ],
           ),
         ),
