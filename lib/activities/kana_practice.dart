@@ -15,16 +15,52 @@ class _KanaPracticeState extends State<KanaPractice> {
 
   var kpNum = 1;
   var kpWord = 'taberu';
-  var kpWordTemp = 'taberu';
   var kpKana = 'たべる';
   bool showAnswer = false;
 
   // kpNum = 1;
-  var kpHiragana = ['taberu', 'sushi', 'jisho', 'niku', 'neko'];
+  var kpHiragana = ['taberu', 'sushi', 'jisho', 'niku', 'neko',
+                    'manga', 'shinbun', 'yoru', 'gakkou', 'tamago',
+                    'ashita', 'imouto', 'utau', 'enpitsu', 'okane',
+  ];
 
   // kpNum = 2;
-  var kpKatakana = ['ke-ki', 'pan', 'kare-', 'sofa', 'beddo'];
-  
+  var kpKatakana = ['ke-ki', 'pan', 'kare-', 'sofa', 'beddo',
+                    'basu', 'karenda-', 'kurasu', 'naifu', 'toire',
+                    'doa', 'apa-to', 'gita-', 'guramu', 'hoteru',
+  ];
+
+  void generateWord(){
+    var kpWordTemp;
+    do {
+      if (kpNum == 1) {
+        kpWordTemp = kpHiragana[random.nextInt(kpHiragana.length)];
+      } else if (kpNum == 2) {
+        kpWordTemp = kpKatakana[random.nextInt(kpKatakana.length)];
+      }
+    } while (kpWordTemp == kpWord);
+    kpWord = kpWordTemp;
+    if (kpNum == 1) {
+      kpKana = kana.toHiragana(kpWord);
+    } else if (kpNum == 2) {
+      kpKana = kana.toKatakana(kpWord);
+    }
+    showAnswer = false;
+    setState((){});
+  }
+
+  void changeKana(int value){
+    if (value != kpNum) {
+      if (value == 1) {
+        kpNum = 1;
+      } else if (value == 2) {
+        kpNum = 2;
+      }
+      generateWord();
+      setState((){});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,14 +74,8 @@ class _KanaPracticeState extends State<KanaPractice> {
                 PopupMenuButton(
                     icon: Icon(Icons.menu),
                     elevation: 40,
-                    onSelected: (value){
-                      if (value == 1){
-                        kpNum = 1;
-                      }
-                      else if (value == 2){
-                        kpNum = 2;
-                      }
-                      setState((){});
+                    onSelected: (int value){
+                      changeKana(value);
                     },
                     itemBuilder: (context) => [
                       PopupMenuItem(
@@ -113,7 +143,7 @@ class _KanaPracticeState extends State<KanaPractice> {
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(top: 20, bottom: 15),
+                    margin: EdgeInsets.only(top: 20),
                       width: 200,
                       child: ElevatedButton(
                           onPressed: (){
@@ -124,28 +154,19 @@ class _KanaPracticeState extends State<KanaPractice> {
                       ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 15, bottom: 20),
+                    margin: EdgeInsets.only(top: 20),
                     width: 200,
                     child: ElevatedButton(
-                        onPressed: (){
-                          do {
-                            if (kpNum == 1) {
-                              kpWordTemp = kpHiragana[random.nextInt(kpHiragana.length)];
-                            }
-                            else if (kpNum == 2) {
-                              kpWordTemp = kpKatakana[random.nextInt(kpKatakana.length)];
-                            }
-                          } while (kpWordTemp == kpWord);
-                          kpWord = kpWordTemp;
-                          if (kpNum == 1) {
-                            kpKana = kana.toHiragana(kpWord);
-                          }
-                          else if (kpNum == 2) {
-                            kpKana = kana.toKatakana(kpWord);
-                          }
-                          setState((){});
-                        },
+                        onPressed: generateWord,
                         child: Text('Another Word')
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    width: 200,
+                    child: ElevatedButton(
+                        onPressed: (){},
+                        child: Text('Say Word')
                     ),
                   )
                 ],
