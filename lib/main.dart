@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo 2',
+      title: 'Japanese For Beginners',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
@@ -39,40 +39,44 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ActivitiesPage()),
-                  );
-                },
-                child:
-                Text('Activities')
-            ),
-            ElevatedButton(
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ReferencesPage()),
-                  );
-                },
-                child:
-                Text('References')
-            ),
-            ElevatedButton(
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LessonsPage()),
-                  );
-                },
-                child:
-                Text('Lessons')
-            )
-          ],
+        child: IntrinsicWidth(
+          stepWidth: 150,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ActivitiesPage()),
+                    );
+                  },
+                  child:
+                  Text('Activities')
+              ),
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ReferencesPage()),
+                    );
+                  },
+                  child:
+                  Text('References')
+              ),
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LessonsPage()),
+                    );
+                  },
+                  child:
+                  Text('Lessons')
+              )
+            ],
+          ),
         ),
       ),
     );

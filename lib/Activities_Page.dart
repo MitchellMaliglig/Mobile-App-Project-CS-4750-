@@ -27,7 +27,8 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
                       MaterialPageRoute(builder: (context) => KanaPractice()),
                   );
                   },
-                child: Text('Kana Practice')),
+                child: Text('Kana Practice')
+            ),
           ],
         ),
       ),

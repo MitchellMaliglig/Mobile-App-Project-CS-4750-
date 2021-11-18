@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kana_kit/kana_kit.dart';
 import 'dart:math';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class KanaPractice extends StatefulWidget {
   const KanaPractice({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class KanaPractice extends StatefulWidget {
 class _KanaPracticeState extends State<KanaPractice> {
   final kana = KanaKit();
   Random random = new Random();
+  FlutterTts tts = FlutterTts();
 
   var kpNum = 1;
   var kpWord = 'taberu';
@@ -59,6 +61,13 @@ class _KanaPracticeState extends State<KanaPractice> {
       generateWord();
       setState((){});
     }
+  }
+
+  Future speak() async{
+    await tts.setLanguage("ja-JP");
+    await tts.setPitch(1);
+    await tts.setSpeechRate(.5);
+    await tts.speak(kpKana);
   }
 
   @override
@@ -165,7 +174,7 @@ class _KanaPracticeState extends State<KanaPractice> {
                     margin: EdgeInsets.only(top: 20),
                     width: 200,
                     child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: speak,
                         child: Text('Say Word')
                     ),
                   )
