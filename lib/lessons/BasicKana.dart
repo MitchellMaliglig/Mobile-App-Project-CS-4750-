@@ -65,7 +65,7 @@ class _BasicKanaState extends State<BasicKana> {
             Align(
               alignment: Alignment.topLeft,
               child: Text('     A few things to note here:\n\n'
-                  '- Y and W have only 3 and 3 character combinations, respectively.\n'
+                  '- Y and W have only 3 and 2 character combinations, respectively.\n'
                   '- N can be followed by a vowel or remain by itself.\n'
                   '- Some characters have a reading that may be different from what you expect ('
                   'し,ち,つ & ふ are read as shi, chi, tsu & fu, respectively).\n\n'

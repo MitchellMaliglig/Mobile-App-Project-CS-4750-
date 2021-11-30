@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: MyHomePage(title: 'Home Page'),
+      home: MyHomePage(title: 'Japanese For Beginners'),
     );
   }
 }
@@ -73,8 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   },
                   child:
-                  Text('Lessons')
-              )
+                  Text('Lessons'),
+              ),
             ],
           ),
         ),
