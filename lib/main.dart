@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app_project/Lessons_Page.dart';
-import 'package:mobile_app_project/References_Page.dart';
-import 'Activities_Page.dart';
+import 'package:mobile_app_project/activities/kana_practice.dart';
+import 'package:mobile_app_project/lessons/lesson_page.dart';
+import 'package:mobile_app_project/lessons/Lesson_Data.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,49 +35,111 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: IntrinsicWidth(
-          stepWidth: 150,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              ElevatedButton(
-                  onPressed: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ActivitiesPage()),
-                    );
-                  },
-                  child:
-                  Text('Activities')
+      body: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 30, bottom: 20),
+            child: Text(widget.title,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+                decorationThickness: 2,
               ),
-              ElevatedButton(
-                  onPressed: (){
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  width: 175,
+                  height: 175,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>
+                            LessonPage(
+                              title: 'Greetings',
+                              greetingsData: greetingsData,)),
+                      );
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.person, size: 30,),
+                        Text('Greetings', style: TextStyle(fontSize: 30),),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 175,
+                  height: 175,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('123', style: TextStyle(fontSize: 30,),),
+                        Text('Numbers (1-10)',
+                          style: TextStyle(fontSize: 30),
+                          textAlign: TextAlign.center,),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                width: 175,
+                height: 175,
+                child: ElevatedButton(
+                  onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ReferencesPage()),
+                      MaterialPageRoute(builder: (context) =>
+                          KanaPractice(title: 'Hiragana Practice', kpNum: 1,)),
                     );
                   },
-                  child:
-                  Text('References')
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('ひらがな', style: TextStyle(fontSize: 30,),),
+                      Text('Hiragana', style: TextStyle(fontSize: 30),),
+                    ],
+                  ),
+                ),
               ),
-              ElevatedButton(
-                  onPressed: (){
+              SizedBox(
+                width: 175,
+                height: 175,
+                child: ElevatedButton(
+                  onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LessonsPage()),
+                      MaterialPageRoute(builder: (context) =>
+                          KanaPractice(title: 'Katakana Practice', kpNum: 2,)),
                     );
                   },
-                  child:
-                  Text('Lessons'),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('カタカナ', style: TextStyle(fontSize: 30,),),
+                      Text('Katakana', style: TextStyle(fontSize: 30),),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }

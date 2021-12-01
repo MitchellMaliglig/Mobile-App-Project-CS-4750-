@@ -1,126 +1,84 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kana_kit/kana_kit.dart';
 import 'dart:math';
-import 'package:flutter_tts/flutter_tts.dart';
+import 'package:mobile_app_project/jp_tools.dart';
 
 class KanaPractice extends StatefulWidget {
-  const KanaPractice({Key? key}) : super(key: key);
+  const KanaPractice({Key? key, required this.title, required this.kpNum}) : super(key: key);
+
+  final String title;
+
+  // kpNum = 1 --> hiragana
+  // kpNum = 2 --> katakana
+  final int kpNum;
 
   @override
   _KanaPracticeState createState() => _KanaPracticeState();
 }
 
 class _KanaPracticeState extends State<KanaPractice> {
-  final kana = KanaKit();
   Random random = new Random();
-  FlutterTts tts = FlutterTts();
 
-  var kpNum = 1;
-  var kpWord = 'taberu';
-  var kpKana = 'たべる';
+  String kpWord = '';
+  String kpKana = '';
+  String translation = '';
   bool showAnswer = false;
 
   // kpNum = 1;
-  var kpHiragana = ['taberu', 'sushi', 'jisho', 'niku', 'neko',
-                    'manga', 'shinbun', 'yoru', 'gakkou', 'tamago',
-                    'ashita', 'imouto', 'utau', 'enpitsu', 'okane',
+  List kpHiragana = ['asa', 'sushi', 'isu', 'gyuunyuu', 'neko',
+                    'manga', 'chiisai', 'yoru', 'gakkou', 'tamago',
+                    'ashita', 'imouto', 'utau', 'enpitsu', 'oyogu',
   ];
 
   // kpNum = 2;
-  var kpKatakana = ['ke-ki', 'pan', 'kare-', 'sofa', 'beddo',
+  List kpKatakana = ['ke-ki', 'pan', 'kare-', 'sofa', 'beddo',
                     'basu', 'karenda-', 'kurasu', 'naifu', 'toire',
                     'doa', 'apa-to', 'gita-', 'guramu', 'hoteru',
   ];
 
-  void generateWord(){
-    var kpWordTemp;
+  Future<void> generateWord() async {
+    String kpWordTemp = '';
     do {
-      if (kpNum == 1) {
+      if (widget.kpNum == 1) {
         kpWordTemp = kpHiragana[random.nextInt(kpHiragana.length)];
-      } else if (kpNum == 2) {
+      } else if (widget.kpNum == 2) {
         kpWordTemp = kpKatakana[random.nextInt(kpKatakana.length)];
       }
     } while (kpWordTemp == kpWord);
     kpWord = kpWordTemp;
-    if (kpNum == 1) {
+    if (widget.kpNum == 1) {
       kpKana = kana.toHiragana(kpWord);
-    } else if (kpNum == 2) {
+    } else if (widget.kpNum == 2) {
       kpKana = kana.toKatakana(kpWord);
     }
     showAnswer = false;
+    var translate = await toEng(kpKana);
+    translation = translate.toString().toLowerCase();
     setState((){});
-  }
-
-  void changeKana(int value){
-    if (value != kpNum) {
-      if (value == 1) {
-        kpNum = 1;
-      } else if (value == 2) {
-        kpNum = 2;
-      }
-      generateWord();
-      setState((){});
-    }
-  }
-
-  Future speak() async{
-    await tts.setLanguage("ja-JP");
-    await tts.setPitch(1);
-    await tts.setSpeechRate(.5);
-    await tts.speak(kpKana);
   }
 
   @override
   Widget build(BuildContext context) {
+    if (kpWord == ''){
+      generateWord();
+    }
+
     return Scaffold(
       body: Column(
         children: [
           Expanded(
             flex: 10,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                PopupMenuButton(
-                    icon: Icon(Icons.menu),
-                    elevation: 40,
-                    onSelected: (int value){
-                      changeKana(value);
-                    },
-                    itemBuilder: (context) => [
-                      PopupMenuItem(
-                          child: Text('Hiragana',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          value: 1,
-                      ),
-                      PopupMenuItem(
-                          child: Text('Katakana',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          value: 2,
-                      ),
-                    ]
-                ),
-                Expanded(
-                  flex: 5,
-                  child: Center(
-                      child:
-                      Text('Kana Practice',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      )
-                  ),
-                ),
-                Spacer(),
-              ],
+            child: Container(
+              margin: EdgeInsets.only(top: 30),
+              child: Center(
+                  child:
+                  Text(widget.title,
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+              ),
             ),
           ),
 
@@ -137,9 +95,10 @@ class _KanaPracticeState extends State<KanaPractice> {
                       ),
                     ),
                   ),
-                  Text((showAnswer) ? kpWord : '---', // word in romaji
+                  Text((showAnswer) ? kpWord  + ': ' + translation : '***',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 60,
+                      fontSize: 50,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -174,7 +133,9 @@ class _KanaPracticeState extends State<KanaPractice> {
                     margin: EdgeInsets.only(top: 20),
                     width: 200,
                     child: ElevatedButton(
-                        onPressed: speak,
+                        onPressed: () async{
+                          speak(kpKana);
+                        },
                         child: Text('Say Word')
                     ),
                   )
