@@ -3,16 +3,14 @@ import 'package:mobile_app_project/lessons/Lesson_Data.dart';
 import 'package:mobile_app_project/jp_tools.dart';
 
 class LessonPage extends StatefulWidget {
-  const LessonPage({Key? key, required this.title, required this.greetingsData}) : super(key: key);
+  const LessonPage({Key? key, required this.title, required this.lessonData}) : super(key: key);
 
   final String title;
-  final List<LessonData> greetingsData;
+  final List<LessonData> lessonData;
 
   @override
   _LessonPageState createState() => _LessonPageState();
 }
-
- List<LessonData> greetings = greetingsData;
 
 class _LessonPageState extends State<LessonPage> {
   @override
@@ -38,7 +36,7 @@ class _LessonPageState extends State<LessonPage> {
             ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount:greetings.length,
+                itemCount:widget.lessonData.length,
                 itemBuilder: (context,index){
                   return Container(
                     margin: EdgeInsets.only(bottom: 40, left: 5, right: 5),
@@ -68,14 +66,14 @@ class _LessonPageState extends State<LessonPage> {
                           flex: 40,
                           child: Column(
                             children: [
-                              Text(kana.toHiragana(greetings[index].romaji.replaceAll(' ', '')),
+                              Text(kana.toHiragana(widget.lessonData[index].romaji.replaceAll(' ', '')),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
                               ),),
-                              Text(greetings[index].romaji,
+                              Text(widget.lessonData[index].romaji,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 20,
@@ -90,13 +88,13 @@ class _LessonPageState extends State<LessonPage> {
                             child: IconButton(
                               icon: Icon(Icons.volume_up, size: 30,),
                               onPressed: (){
-                                speak(kana.toHiragana(greetings[index].romaji.replaceAll(' ', '')));
+                                speak(kana.toHiragana(widget.lessonData[index].romaji.replaceAll(' ', '')));
                               },
                             ),
                         ),
                         Expanded(
                           flex: 35,
-                          child: Text(greetings[index].english,
+                          child: Text(widget.lessonData[index].english,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 20,

@@ -31,25 +31,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(widget.title,
+            style: TextStyle(fontSize: 30),
+          ),
+        ),
+        backgroundColor: Colors.purple[700],
+      ),
       body: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 30, bottom: 20),
-            child: Text(widget.title,
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline,
-                decorationThickness: 2,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 25),
+            margin: EdgeInsets.only(top: 20, bottom: 25),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -57,13 +53,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 175,
                   height: 175,
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.green[700],
+                    ),
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) =>
                             LessonPage(
                               title: 'Greetings',
-                              greetingsData: greetingsData,)),
+                              lessonData: greetingsData,)
+                        ),
                       );
                     },
                     child: Column(
@@ -79,7 +79,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 175,
                   height: 175,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.blue[700],
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>
+                            LessonPage(
+                              title: 'Numbers',
+                              lessonData: numbersData,)
+                        ),
+                      );
+                    },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -94,50 +106,76 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(
-                width: 175,
-                height: 175,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>
-                          KanaPractice(title: 'Hiragana Practice', kpNum: 1,)),
-                    );
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('ひらがな', style: TextStyle(fontSize: 30,),),
-                      Text('Hiragana', style: TextStyle(fontSize: 30),),
-                    ],
+          Container(
+            margin: EdgeInsets.only(bottom: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  width: 175,
+                  height: 175,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.yellow[700],
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>
+                            KanaPractice(title: 'Hiragana Practice', kpNum: 1,)),
+                      );
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('ひらがな', style: TextStyle(fontSize: 30,),),
+                        Text('Hiragana', style: TextStyle(fontSize: 30),),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 175,
-                height: 175,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>
-                          KanaPractice(title: 'Katakana Practice', kpNum: 2,)),
-                    );
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('カタカナ', style: TextStyle(fontSize: 30,),),
-                      Text('Katakana', style: TextStyle(fontSize: 30),),
-                    ],
+                SizedBox(
+                  width: 175,
+                  height: 175,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.orange[700],
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>
+                            KanaPractice(title: 'Katakana Practice', kpNum: 2,)),
+                      );
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('カタカナ', style: TextStyle(fontSize: 30,),),
+                        Text('Katakana', style: TextStyle(fontSize: 30),),
+                      ],
+                    ),
                   ),
                 ),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: 175,
+            height: 175,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red[700],
               ),
-            ],
+              onPressed: () {},
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.book, size: 30,),
+                  Text('Reference', style: TextStyle(fontSize: 30),),
+                ],
+              ),
+            ),
           ),
         ],
       ),
