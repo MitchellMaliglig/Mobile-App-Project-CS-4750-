@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 class AdvancedKana extends StatefulWidget {
-  const AdvancedKana({Key? key}) : super(key: key);
+  const AdvancedKana({Key? key, required this.title, required this.color}) : super(key: key);
+
+  final String title;
+  final Color color;
 
   @override
   _AdvancedKanaState createState() => _AdvancedKanaState();
@@ -10,20 +13,15 @@ class _AdvancedKanaState extends State<AdvancedKana> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title,
+          style: TextStyle(fontSize:30),),
+        backgroundColor: widget.color,
+      ),
       body: Container(
-        margin: EdgeInsets.only(left: 10, right: 10),
+        margin: EdgeInsets.only(top: 20, left: 10, right: 10),
         child: ListView(
           children: [
-            Center(
-              child: Text('Advanced Kana',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.underline,
-                  decorationThickness: 2,
-                ),
-              ),
-            ),
             Container(
               margin: EdgeInsets.only(top: 5),
               child: Align(
@@ -131,18 +129,15 @@ class _AdvancedKanaState extends State<AdvancedKana> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 10, bottom: 10),
+              margin: EdgeInsets.only(top: 20, bottom: 20),
               child: InteractiveViewer(
                   child: Image.asset('assets/hiraganachart.png')),
             ),
-            Text('     If you can master the hiragana chart shown above, plus everything else that we have talked '
-                'about, then you will have learned everything that there is to know about hiragana. Learning katakana '
-                'should be much easier now, given the fact that you now understand how hiragana works.\n',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            )
+            Container(
+              margin: EdgeInsets.only(top: 20, bottom: 20),
+              child: InteractiveViewer(
+                  child: Image.asset('assets/katakanachart.png')),
+            ),
           ],
         ),
       ),

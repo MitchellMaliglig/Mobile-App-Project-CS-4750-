@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app_project/activities/kana_practice.dart';
+import 'package:mobile_app_project/references/references_page.dart';
+import 'package:mobile_app_project/lessons/kana_practice.dart';
 import 'package:mobile_app_project/lessons/lesson_page.dart';
 import 'package:mobile_app_project/lessons/Lesson_Data.dart';
 
@@ -62,7 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         MaterialPageRoute(builder: (context) =>
                             LessonPage(
                               title: 'Greetings',
-                              lessonData: greetingsData,)
+                              lessonData: greetingsData,
+                                color: (Colors.green[700])!
+                            )
                         ),
                       );
                     },
@@ -88,7 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         MaterialPageRoute(builder: (context) =>
                             LessonPage(
                               title: 'Numbers',
-                              lessonData: numbersData,)
+                              lessonData: numbersData,
+                              color: (Colors.blue[700])!,
+                            )
                         ),
                       );
                     },
@@ -96,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text('123', style: TextStyle(fontSize: 30,),),
-                        Text('Numbers (1-10)',
+                        Text('Numbers',
                           style: TextStyle(fontSize: 30),
                           textAlign: TextAlign.center,),
                       ],
@@ -116,13 +121,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   height: 175,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.yellow[700],
+                      primary: Colors.yellow[800],
                     ),
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) =>
-                            KanaPractice(title: 'Hiragana Practice', kpNum: 1,)),
+                            KanaPractice(
+                              title: 'Hiragana Practice',
+                              kpNum: 1,
+                              color: (Colors.yellow[800])!,
+                            )),
                       );
                     },
                     child: Column(
@@ -145,7 +154,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) =>
-                            KanaPractice(title: 'Katakana Practice', kpNum: 2,)),
+                            KanaPractice(
+                              title: 'Katakana Practice',
+                              kpNum: 2,
+                              color: (Colors.orange[700])!,
+                            )),
                       );
                     },
                     child: Column(
@@ -167,7 +180,16 @@ class _MyHomePageState extends State<MyHomePage> {
               style: ElevatedButton.styleFrom(
                 primary: Colors.red[700],
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>
+                      ReferencesPage(
+                        title: 'Reference Page',
+                        color: (Colors.red[700])!,
+                      )),
+                );
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

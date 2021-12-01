@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class JPTextIntro extends StatefulWidget {
-  const JPTextIntro({Key? key}) : super(key: key);
+  const JPTextIntro({Key? key, required this.title, required this.color}) : super(key: key);
+
+  final String title;
+  final Color color;
 
   @override
   _JPTextIntroState createState() => _JPTextIntroState();
@@ -11,20 +14,15 @@ class _JPTextIntroState extends State<JPTextIntro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title,
+          style: TextStyle(fontSize:30),),
+        backgroundColor: widget.color,
+      ),
       body: ListView(
         children: [
-          Center(
-            child: Text('Intro to JP Text',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline,
-                decorationThickness: 2,
-              ),
-            ),
-          ),
           Container(
-            margin: EdgeInsets.only(left: 10, right: 10),
+            margin: EdgeInsets.only(top: 20, left: 10, right: 10),
             child: Align(
               alignment: Alignment.topLeft,
               child: Text(
